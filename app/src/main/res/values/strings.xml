@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Golem</string>
+
+    <string name="name">Name:</string>
+    <string name="species">Species:</string>
+    <string name="status">Status:</string>
+    <string name="gender">Gender:</string>
+</resources>

@@ -2,27 +2,40 @@ package com.example.golem
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import androidx.fragment.app.Fragment
+import com.example.golem.databinding.ActivityMainBinding
+import com.example.golem.fragments.CharactersFragment
+import com.example.golem.fragments.EpisodesFragment
+import com.example.golem.fragments.LocationsFragment
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        val recycler: RecyclerView = findViewById(R.id.character_list_recycler)
-        val characterlist = generate_characters(100)
+        val charactersFragment = CharactersFragment()
+        val locationsFragment = LocationsFragment()
+        val episodesFragment = EpisodesFragment()
 
-        recycler.adapter = CharacterListAdapter(this, characterlist)
-    }
+        switchFragment(charactersFragment)
 
-    private fun generate_characters(count: Int): List<CharacterData> {
-        val charList = ArrayList<CharacterData>()
-        for (i in 0 until count){
-        val item = CharacterData("name$i", "species$i", "status$i", "gender$i" )
-        charList += item
+        binding.bottomNavMenu.setOnItemSelectedListener{
+            when (it.itemId){
+                R.id.ic_characters -> switchFragment(charactersFragment)
+                R.id.ic_locations -> switchFragment(locationsFragment)
+                R.id.ic_episodes -> switchFragment(episodesFragment)
+            }
+            true
         }
-        return charList
     }
+
+    private fun switchFragment(fragment: Fragment){
+        supportFragmentManager.beginTransaction().apply{
+            replace(R.id.main_scr_frame, fragment)
+            commit()
+        }
+    }
+
 }

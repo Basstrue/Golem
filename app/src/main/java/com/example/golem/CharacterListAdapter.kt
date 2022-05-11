@@ -25,8 +25,8 @@ class CharacterListAdapter(val context: Context, val characters: List<CharacterD
 
     override fun onBindViewHolder(holder: VH, position: Int) {
        holder.name.text = characters[position].name
-       holder.species.text = characters[position].species
        holder.status.text = characters[position].status
+       holder.species.text = characters[position].species
        holder.gender.text = characters[position].gender
     }
 

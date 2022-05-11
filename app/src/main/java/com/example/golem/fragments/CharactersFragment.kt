@@ -11,6 +11,7 @@ import com.example.golem.CharacterData
 import com.example.golem.CharacterListAdapter
 import com.example.golem.MainActivity
 import com.example.golem.R
+import com.example.golem.api.RetrofitInstance
 import com.example.golem.databinding.FragmentCharactersBinding
 
 class CharactersFragment: Fragment() {
@@ -26,8 +27,12 @@ class CharactersFragment: Fragment() {
         val recycler: RecyclerView = root.findViewById(R.id.character_list_recycler)
         //val recycler: RecyclerView = view.findViewById(R.id.character_list_recycler)
         val characterlist = generateCharacters(100)
+        //val response = RetrofitInstance.api.getListCharacters()
         recycler.adapter = CharacterListAdapter(requireContext(), characterlist)
         recycler.layoutManager = LinearLayoutManager(requireContext())
+
+
+
         return binding.root
     }
 

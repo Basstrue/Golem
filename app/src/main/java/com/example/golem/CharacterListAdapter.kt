@@ -10,9 +10,9 @@ import androidx.recyclerview.widget.RecyclerView
 import retrofit2.Response
 
 
-class CharacterListAdapter(val context: Context, val characters: List<CharacterData>): RecyclerView.Adapter<CharacterListAdapter.VH>() {
+class CharacterListAdapter(private var characters: List<CharacterData>): RecyclerView.Adapter<CharacterListAdapter.VH>() {
 
-    class VH(view: View): RecyclerView.ViewHolder(view){
+    inner class VH(view: View): RecyclerView.ViewHolder(view){
         val name: TextView = view.findViewById(R.id.character_name)
         val species: TextView = view.findViewById(R.id.character_species)
         val status: TextView = view.findViewById(R.id.character_status)
@@ -20,7 +20,7 @@ class CharacterListAdapter(val context: Context, val characters: List<CharacterD
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
-       val view = LayoutInflater.from(context).inflate(R.layout.character_list_item, parent, false)
+       val view = LayoutInflater.from(parent.context).inflate(R.layout.character_list_item, parent, false)
         return VH(view)
     }
 
